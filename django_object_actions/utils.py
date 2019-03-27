@@ -5,6 +5,7 @@ from itertools import chain
 
 from django.conf.urls import url
 from django.contrib import messages
+from django.contrib.admin.utils import quote
 from django.db.models.query import QuerySet
 from django.http import Http404, HttpResponseRedirect
 from django.http.response import HttpResponseBase
@@ -264,7 +265,7 @@ class ChangeActionView(SingleObjectMixin, BaseActionView):
 
     @property
     def back_url(self):
-        return reverse(self.back, args=(self.kwargs['pk'],), current_app=self.current_app)
+        return reverse(self.back, args=(quote(self.kwargs['pk']),), current_app=self.current_app)
 
 
 class ChangeListActionView(MultipleObjectMixin, BaseActionView):
